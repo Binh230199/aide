@@ -1,0 +1,10 @@
+{
+  "hooks": [
+    {
+      "event": "pre-tool-call",
+      "tools": ["runCommands"],
+      "command": "bash .github/hooks/pre-commit-check/check.sh",
+      "description": "Run pre-commit quality checks before executing shell commands"
+    }
+  ]
+}
