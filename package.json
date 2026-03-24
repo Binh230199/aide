@@ -1,0 +1,145 @@
+{
+  "name": "aide",
+  "displayName": "My Team Copilot",
+  "description": "Đóng gói agents, instructions, skills cho team — cài 1 lần dùng mọi nơi",
+  "version": "1.0.0",
+  "publisher": "my-team",
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "AI",
+    "Chat"
+  ],
+  "keywords": [
+    "copilot",
+    "agent",
+    "ai",
+    "chat participant",
+    "instructions"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "chatParticipants": [
+      {
+        "id": "aide.assistant",
+        "name": "my-team",
+        "fullName": "My Team Copilot",
+        "description": "Trợ lý AI của team — review code, lập kế hoạch, sinh test",
+        "isSticky": true,
+        "commands": [
+          {
+            "name": "review",
+            "description": "Review code theo chuẩn team — kiểm tra logic, security, performance"
+          },
+          {
+            "name": "plan",
+            "description": "Lập kế hoạch triển khai feature với phân tích codebase"
+          },
+          {
+            "name": "test",
+            "description": "Sinh unit tests với coverage cao cho code được chọn"
+          },
+          {
+            "name": "debug",
+            "description": "Phân tích lỗi và đề xuất fix theo cách tiếp cận có hệ thống"
+          }
+        ],
+        "disambiguation": [
+          {
+            "categoryName": "code-review",
+            "description": "User wants to review, inspect, or analyze code quality",
+            "examples": [
+              "review this function",
+              "check my code",
+              "find bugs in this file"
+            ]
+          },
+          {
+            "categoryName": "planning",
+            "description": "User wants to plan or design a feature implementation",
+            "examples": [
+              "help me plan this feature",
+              "how should I implement this",
+              "design an architecture for"
+            ]
+          }
+        ]
+      }
+    ],
+    "commands": [
+      {
+        "command": "aide.deploy",
+        "title": "My Team Copilot: Deploy Agents & Instructions",
+        "category": "My Team Copilot"
+      },
+      {
+        "command": "aide.undeploy",
+        "title": "My Team Copilot: Remove Deployed Agents & Instructions",
+        "category": "My Team Copilot"
+      },
+      {
+        "command": "aide.list",
+        "title": "My Team Copilot: List Deployed Resources",
+        "category": "My Team Copilot"
+      },
+      {
+        "command": "aide.refresh",
+        "title": "My Team Copilot: Refresh / Re-deploy All Content",
+        "category": "My Team Copilot"
+      }
+    ],
+    "configuration": {
+      "title": "My Team Copilot",
+      "properties": {
+        "myTeamCopilot.autoDeployAgents": {
+          "type": "boolean",
+          "default": true,
+          "description": "Tự động deploy agents & instructions khi extension khởi động"
+        },
+        "myTeamCopilot.participantModel": {
+          "type": "string",
+          "default": "gpt-4.1",
+          "description": "Model mặc định cho @my-team chat participant"
+        },
+        "myTeamCopilot.enableTelemetry": {
+          "type": "boolean",
+          "default": false,
+          "description": "Cho phép gửi telemetry ẩn danh để cải thiện extension"
+        }
+      }
+    }
+  },
+  "extensionDependencies": [],
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "node esbuild.js --production",
+    "watch": "node esbuild.js --watch",
+    "pretest": "npm run build",
+    "test": "node ./dist/test/runTest.js",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.95.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "@vscode/test-electron": "^2.4.0",
+    "@vscode/vsce": "^3.0.0",
+    "esbuild": "^0.24.0",
+    "eslint": "^8.57.0",
+    "glob": "^10.0.0",
+    "mocha": "^10.0.0",
+    "typescript": "^5.5.0"
+  },
+  "dependencies": {
+    "@vscode/chat-extension-utils": "0.0.0-alpha.5"
+  }
+}
