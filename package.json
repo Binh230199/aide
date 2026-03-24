@@ -4,6 +4,10 @@
   "description": "Đóng gói agents, instructions, skills cho team — cài 1 lần dùng mọi nơi",
   "version": "1.0.0",
   "publisher": "my-team",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/my-team/aide"
+  },
   "icon": "icon.png",
   "engines": {
     "vscode": "^1.95.0"
